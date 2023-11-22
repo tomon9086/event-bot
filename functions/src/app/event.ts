@@ -18,12 +18,13 @@ export const postNewEvents = async () => {
   )
   const latestMessage = messagesFromMe?.first()
   const duplicatedEventIndex = events.findIndex(
-    (event) => latestMessage?.content === formatEventMessage(event)
+    (event) => latestMessage?.content.includes(event.event_url)
   )
   const newEvents = events.slice(
     0,
     duplicatedEventIndex < 0 ? events.length : duplicatedEventIndex
   )
+
   await Promise.all(
     newEvents
       .map((event) => formatEventMessage(event))
