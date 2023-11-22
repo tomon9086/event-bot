@@ -2,6 +2,7 @@
   "name": "functions",
   "scripts": {
     "lint": "eslint --ext .js,.ts src/**/*",
+    "pretty": "prettier --write .",
     "build": "webpack",
     "watch": "webpack -w",
     "serve": "npm run build && firebase emulators:start --only functions",
