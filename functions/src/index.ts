@@ -5,7 +5,7 @@ export const ping = https.onRequest((_, res) => {
   res.send('pong')
 })
 
-export const everyday = pubsub
+export const everyHourDaytime = pubsub
   .schedule('0 9-21 * * *')
   .timeZone('Asia/Tokyo')
   .onRun(async (_context) => {
