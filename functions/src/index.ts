@@ -1,7 +1,10 @@
 import { https, pubsub } from 'firebase-functions'
 import { DateTime } from 'luxon'
+import { postNewEvents } from './app/event'
 
 export const ping = https.onRequest((_, res) => {
+  postNewEvents()
+  
   res.send('pong')
 })
 
