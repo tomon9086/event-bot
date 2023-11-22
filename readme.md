@@ -1,2 +1,2 @@
-# holiday-notifier
+# event-bot
 
