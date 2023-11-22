@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'functions/**'
+    # paths:
+    #   - 'functions/**'
 
 defaults:
   run:
