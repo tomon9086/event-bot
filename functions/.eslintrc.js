@@ -2,22 +2,15 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    node: true,
+    node: true
   },
-  extends: [
-    'standard',
-    'plugin:@typescript-eslint/recommended',
-    'prettier'
-  ],
-  parser: "@typescript-eslint/parser",
+  extends: ['standard', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: "tsconfig.json",
-    sourceType: "module",
+    project: 'tsconfig.json',
+    sourceType: 'module'
   },
-  plugins: [
-    "@typescript-eslint",
-    "import",
-  ],
+  plugins: ['@typescript-eslint', 'import'],
   ignorePatterns: [],
   rules: {
     '@typescript-eslint/naming-convention': [
@@ -58,9 +51,9 @@ module.exports = {
     ]
   },
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"]
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
       },
       typescript: {},
       webpack: {}

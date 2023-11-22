@@ -8,8 +8,8 @@ import {
 
 export const APPLICATION_ID = '1176670024589656144'
 
-const channelId  =  discord.channelId
-const discordToken  =  discord.token
+const channelId = discord.channelId
+const discordToken = discord.token
 
 if (!channelId) {
   throw new Error('empty CHANNEL_ID')

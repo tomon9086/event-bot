@@ -1,15 +1,12 @@
 import { DateTime } from 'luxon'
 
 export const formatDate = (date: Date): string => {
-  return DateTime.fromJSDate(date)
-    .setZone('Asia/Tokyo')
-    .toFormat('yyyy/MM/dd')
+  return DateTime.fromJSDate(date).setZone('Asia/Tokyo').toFormat('yyyy/MM/dd')
 }
 
 export const compareDate = (a: Date, b: Date): boolean => {
-  const format = (date: Date) => DateTime.fromJSDate(date)
-    .setZone('Asia/Tokyo')
-    .toFormat('yyyy-MM-dd')
+  const format = (date: Date) =>
+    DateTime.fromJSDate(date).setZone('Asia/Tokyo').toFormat('yyyy-MM-dd')
   const ads = format(a)
   const bds = format(b)
   return ads === bds
