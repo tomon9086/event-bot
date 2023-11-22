@@ -1,0 +1,16 @@
+import { https, pubsub } from 'firebase-functions'
+import { DateTime } from 'luxon'
+
+export const ping = https.onRequest((_, res) => {
+  res.send('pong')
+})
+
+export const everyday = pubsub
+  .schedule('0 9 * * *')
+  .timeZone('Asia/Tokyo')
+  .onRun((_context) => {
+    const now = DateTime.now()
+      .setZone('Asia/Tokyo')
+
+    console.log(now)
+  })
