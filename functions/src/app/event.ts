@@ -16,13 +16,8 @@ export const postNewEvents = async () => {
   const messagesFromMe = messages?.filter(
     (message) => message.author.id === APPLICATION_ID
   )
-  const latestMessage = messagesFromMe?.first()
-  const duplicatedEventIndex = events.findIndex(
-    (event) => latestMessage?.content.includes(event.event_url)
-  )
-  const newEvents = events.slice(
-    0,
-    duplicatedEventIndex < 0 ? events.length : duplicatedEventIndex
+  const newEvents = events.filter(
+    (event) => !messagesFromMe?.find((m) => m.content.includes(event.event_url))
   )
 
   await Promise.all(

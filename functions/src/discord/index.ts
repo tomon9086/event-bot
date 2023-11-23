@@ -44,7 +44,9 @@ export const retrieveMessages = async () => {
   const client = await discordClient()
   const channel = await client.channels.fetch(channelId)
   if (channel?.isTextBased()) {
-    return await channel.messages.fetch()
+    return await channel.messages.fetch({
+      limit: 100
+    })
   }
 
   return undefined
