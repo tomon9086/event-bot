@@ -3,10 +3,10 @@ import { APPLICATION_ID, retrieveMessages, sendMessage } from '../discord'
 
 const formatEventMessage = (event: ConnpassEvent) => {
   return (
-    `「${event.title}」\n` +
-    `日時：${event.started_at ?? 'N/A'}\n` +
-    `場所：${event.place ?? 'N/A'}\n` +
-    `詳細：${event.event_url ?? 'N/A'}`
+    `**${event.title}**\n` +
+    `> 日時：${event.started_at ?? 'N/A'}\n` +
+    `> 場所：${event.place ?? 'N/A'}\n` +
+    `> 詳細：${event.event_url ?? 'N/A'}`
   )
 }
 
