@@ -1,10 +1,14 @@
+import { formatFullDateTime } from '@/utils'
+import { DateTime } from 'luxon'
 import { ConnpassEvent, retrieveEvents } from '../connpass'
 import { APPLICATION_ID, retrieveMessages, sendMessage } from '../discord'
 
 const formatEventMessage = (event: ConnpassEvent) => {
   return (
     `**${event.title}**\n` +
-    `> 日時：${event.started_at ?? 'N/A'}\n` +
+    `> 日時：${
+      formatFullDateTime(DateTime.fromISO(event.started_at)) ?? 'N/A'
+    }\n` +
     `> 場所：${event.place ?? 'N/A'}\n` +
     `> 詳細：${event.event_url ?? 'N/A'}`
   )
