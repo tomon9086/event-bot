@@ -11,14 +11,6 @@ export const APPLICATION_ID = '1176670024589656144'
 const channelId = discord.channelId
 const discordToken = discord.token
 
-if (!channelId) {
-  throw new Error('empty CHANNEL_ID')
-}
-
-if (!discordToken) {
-  throw new Error('empty DISCORD_TOKEN')
-}
-
 const discordClient = async () => {
   const client = new Client({
     intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages]
