@@ -10,7 +10,6 @@
 
    ```sh
    $ firebase functions:config:set \
-      discord.channel_id='1234567890' \
       discord.token='********.***.********'
    ```
 

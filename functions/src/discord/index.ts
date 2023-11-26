@@ -8,7 +8,7 @@ import {
 
 export const APPLICATION_ID = '1176670024589656144'
 
-const channelId = discord.channelId
+const channelId = '1177594721003122689'
 const discordToken = discord.token
 
 const discordClient = async () => {
