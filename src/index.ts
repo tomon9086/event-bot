@@ -1,13 +1,12 @@
-import { https, pubsub } from 'firebase-functions'
+import { CloudEvent, cloudEvent } from '@google-cloud/functions-framework'
 import { postNewEvents } from './app/event'
 
-export const ping = https.onRequest((_, res) => {
-  res.send('pong')
-})
+type PubSubEventData = {
+  message: {
+    data: string
+  }
+}
 
-export const everyHourDaytime = pubsub
-  .schedule('0 9-21 * * *')
-  .timeZone('Asia/Tokyo')
-  .onRun(async (_context) => {
-    await postNewEvents()
-  })
+cloudEvent('everyHourDaytime', async (_: CloudEvent<PubSubEventData>) => {
+  await postNewEvents()
+})

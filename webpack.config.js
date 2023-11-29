@@ -31,7 +31,7 @@ module.exports = {
   },
   output: {
     libraryTarget: 'this',
-    path: path.resolve(__dirname, 'lib'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'index.js'
   }
 }

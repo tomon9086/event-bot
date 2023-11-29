@@ -4,19 +4,47 @@
 
 ## setup
 
-### Discord API Key
+edit `.env` and set `GCP_SERVICE_ACCOUNT_KEY_PATH`
 
-1. Register App on Discord Developer Portal
+## Deploy
 
-2. Deploy to your Firebase Project
+```bash
+terraform init
+terraform plan  # optional
+terraform apply
+```
 
-   ```sh
-   $ firebase functions:config:set \
-      discord.token='********.***.********'
-   ```
+## Clean up
 
-3. Set `API Key` and `API Secret Key` into `.runtimeconfig.json`
+```bash
+terraform destroy
+```
 
-   ```sh
-   $ firebase functions:config:get > .runtimeconfig.json
-   ```
+## Required APIs
+
+- Identity and Access Management (IAM) API
+- Cloud Functions API
+- Eventarc API
+- Cloud Scheduler API
+
+## Required Permissions
+
+- cloudfunctions.functions.create
+- cloudfunctions.functions.delete
+- cloudfunctions.functions.get
+- cloudfunctions.functions.update
+- cloudfunctions.operations.get
+- cloudscheduler.jobs.create
+- cloudscheduler.jobs.delete
+- cloudscheduler.jobs.enable
+- cloudscheduler.jobs.get
+- cloudscheduler.jobs.update
+- iam.serviceAccounts.actAs
+- iam.serviceAccounts.get
+- pubsub.topics.get
+- run.services.getIamPolicy
+- run.services.setIamPolicy
+- storage.buckets.get
+- storage.objects.create
+- storage.objects.delete
+- storage.objects.get
