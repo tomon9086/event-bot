@@ -16,7 +16,7 @@ data dotenv dev {
 }
 
 locals {
-  project_id = "discord-programing-event-bot"
+  project_id     = "discord-programing-event-bot"
   project_region = "asia-northeast1"
   project_zone   = "a"
 }
@@ -30,11 +30,6 @@ provider "google" {
 
 resource "random_id" "bucket_prefix" {
   byte_length = 8
-}
-
-resource "google_service_account" "default" {
-  account_id   = "test-gcf-sa"
-  display_name = "Test Service Account"
 }
 
 resource "google_pubsub_topic" "default" {
@@ -92,7 +87,6 @@ resource "google_cloudfunctions2_function" "discord-programing-event-bot" {
     }
     ingress_settings               = "ALLOW_INTERNAL_ONLY"
     all_traffic_on_latest_revision = true
-    service_account_email          = google_service_account.default.email
   }
 
   event_trigger {
