@@ -87,6 +87,13 @@ resource "google_cloudfunctions2_function" "discord-programing-event-bot" {
     }
     ingress_settings               = "ALLOW_INTERNAL_ONLY"
     all_traffic_on_latest_revision = true
+
+    secret_environment_variables {
+      version = "latest"
+      key = "DISCORD_TOKEN"
+      secret = data.dotenv.dev.env.DISCORD_TOKEN
+      project_id = local.project_id
+    }
   }
 
   event_trigger {
