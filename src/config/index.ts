@@ -1,9 +1,7 @@
-import * as functions from 'firebase-functions'
+import { config } from 'dotenv'
 
-const config = functions.config()
-
-const token = config.discord?.token
+config()
 
 export const discord = {
-  token
+  token: process.env.DISCORD_TOKEN
 }
