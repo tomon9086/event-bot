@@ -58,6 +58,19 @@ resource "google_storage_bucket_object" "default" {
   source = data.archive_file.default.output_path # Path to the zipped function source code
 }
 
+resource "google_secret_manager_secret" "default" {
+  secret_id = "discord-token"
+
+  replication {
+    auto {}
+  }
+}
+
+resource "google_secret_manager_secret_version" "discord-token" {
+  secret      = google_secret_manager_secret.default.id
+  secret_data = data.dotenv.dev.env.DISCORD_TOKEN
+}
+
 resource "google_cloudfunctions2_function" "discord-programing-event-bot" {
   name        = "discord-programing-event-bot"
   location    = local.project_region
@@ -89,9 +102,9 @@ resource "google_cloudfunctions2_function" "discord-programing-event-bot" {
     all_traffic_on_latest_revision = true
 
     secret_environment_variables {
-      version = "latest"
+      version = google_secret_manager_secret_version.discord-token.version
       key = "DISCORD_TOKEN"
-      secret = data.dotenv.dev.env.DISCORD_TOKEN
+      secret = google_secret_manager_secret.default.secret_id
       project_id = local.project_id
     }
   }
