@@ -8,7 +8,6 @@ import {
 
 export const APPLICATION_ID = '1176670024589656144'
 
-const channelId = '1177594721003122689'
 const discordToken = discord.token
 
 const discordClient = async () => {
@@ -21,6 +20,7 @@ const discordClient = async () => {
 }
 
 export const sendMessage = async (
+  channelId: string,
   message: string | MessagePayload | MessageCreateOptions
 ) => {
   const client = await discordClient()
@@ -32,7 +32,7 @@ export const sendMessage = async (
   return undefined
 }
 
-export const retrieveMessages = async () => {
+export const retrieveMessages = async (channelId: string) => {
   const client = await discordClient()
   const channel = await client.channels.fetch(channelId)
   if (channel?.isTextBased()) {

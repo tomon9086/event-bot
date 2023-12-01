@@ -14,37 +14,39 @@ const formatEventMessage = (event: ConnpassEvent) => {
   )
 }
 
-export const postNewEvents = async () => {
+export const postNewEvents = async (channelIds: string[]) => {
   const { events } = await retrieveEvents()
-  const messages = await retrieveMessages()
-  const messagesFromMe = messages?.filter(
-    (message) => message.author.id === APPLICATION_ID
-  )
-  const newEvents = events.filter(
-    (event) => !messagesFromMe?.find((m) => m.content.includes(event.event_url))
-  )
 
-  console.log(
-    events
-      .map((event) => {
-        const isNew = !messagesFromMe?.find((m) =>
-          m.content.includes(event.event_url)
-        )
+  for await (const channelId of channelIds) {
+    const messages = await retrieveMessages(channelId)
+    const messagesFromMe = messages?.filter(
+      (message) => message.author.id === APPLICATION_ID
+    )
+    const newEvents = events.filter(
+      (event) =>
+        !messagesFromMe?.find((m) => m.content.includes(event.event_url))
+    )
 
-        return `"${event.event_id}" is${isNew ? '' : ' NOT'} new event: 「${
-          event.title
-        }」`
-      })
-      .join('\n') +
-      '\n\n' +
-      `new events count: ${newEvents.length}`
-  )
+    console.log(
+      events
+        .map((event) => {
+          const isNew = !messagesFromMe?.find((m) =>
+            m.content.includes(event.event_url)
+          )
 
-  await Promise.all(
-    newEvents
-      .map((event) => formatEventMessage(event))
-      .map((content) => sendMessage(content))
-  )
+          return `${channelId}: "${event.event_id}" is${
+            isNew ? '' : ' NOT'
+          } new event: 「${event.title}」`
+        })
+        .join('\n') +
+        '\n\n' +
+        `new events count: ${newEvents.length}`
+    )
 
-  return newEvents
+    await Promise.all(
+      newEvents
+        .map((event) => formatEventMessage(event))
+        .map((content) => sendMessage(channelId, content))
+    )
+  }
 }
